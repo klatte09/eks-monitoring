@@ -39,15 +39,13 @@ data "aws_ami" "ubuntu" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-
-  owners = ["099720109477"]
 }
 
 resource "aws_instance" "my_app" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t3.micro"
-  key_name               = "devops"
-  subnet_id              = aws_subnet.public_us_east_1a.id
+  ami                    = "ami-0283a57753b18025b"
+  instance_type          = "t2.medium"
+  key_name               = "ohiokey"
+  subnet_id              = aws_subnet.public_us_east_2a.id
   vpc_security_group_ids = [aws_security_group.my_app.id]
 
   user_data = <<EOF
